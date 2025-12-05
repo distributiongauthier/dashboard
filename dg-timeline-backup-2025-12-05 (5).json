@@ -1,0 +1,2034 @@
+{
+  "version": 1,
+  "exportedAt": "2025-12-05T18:07:20.407Z",
+  "templatesByWeekday": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [
+      {
+        "id": 1,
+        "type": "prep",
+        "title": "Préparation de la journée",
+        "desc": "Organisation du plancher, mise en place des bacs, vérification des commandes.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "type": "reception",
+        "title": "Arrivée Pain Pomme",
+        "desc": "Réception et rangement rapide.",
+        "start": "07:45",
+        "end": "08:00",
+        "completed": false
+      },
+      {
+        "id": 4,
+        "type": "reception",
+        "title": "Arrivée Jardin du Saguenay (fromage)",
+        "desc": "Vérification des quantités et mise en chambre froide.",
+        "start": "08:15",
+        "end": "08:30",
+        "completed": false
+      },
+      {
+        "id": 5,
+        "type": "reception",
+        "title": "Arrivée Gordon",
+        "desc": "Déchargement, vérification et rangement.",
+        "start": "08:30",
+        "end": "08:45",
+        "completed": false
+      },
+      {
+        "id": 6,
+        "type": "montage",
+        "title": "Montage des commandes",
+        "desc": "Avancement des commandes après les réceptions du matin.",
+        "start": "08:30",
+        "end": "09:00",
+        "completed": false
+      },
+      {
+        "id": 7,
+        "type": "livraison",
+        "title": "Livraison du fromage frais",
+        "desc": "Livraison du fromage dans les établissements prévus.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 8,
+        "type": "montage",
+        "title": "Montage des commandes (bloc continu)",
+        "desc": "Montage intensif, préparation des bacs et des caisses.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 9,
+        "type": "reception",
+        "title": "Arrivée Club Entrepôt",
+        "desc": "Réception du stock et mise en inventaire.",
+        "start": "10:00",
+        "end": "10:15",
+        "completed": false
+      },
+      {
+        "id": 10,
+        "type": "montage",
+        "title": "Montage des commandes en cours",
+        "desc": "Finalisation des commandes montées le matin.",
+        "start": "10:30",
+        "end": "11:00",
+        "completed": false
+      },
+      {
+        "id": 11,
+        "type": "livraison",
+        "title": "Livraison Coop",
+        "desc": "Livraison prévue pour la Coop.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 12,
+        "type": "ramassage",
+        "title": "Ramassage Wemok",
+        "desc": "Wemok passe récupérer sa commande.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 14,
+        "type": "ramassage",
+        "title": "Ramassage Relais 22",
+        "desc": "Relais 22 passe récupérer sa commande.",
+        "start": "12:00",
+        "end": "12:15",
+        "completed": false
+      },
+      {
+        "id": 15,
+        "type": "montage",
+        "title": "Gros bloc de montage des commandes",
+        "desc": "Préparation des commandes PM et du lendemain, organisation de l’espace.",
+        "start": "12:15",
+        "end": "13:20",
+        "completed": false
+      },
+      {
+        "id": 16,
+        "type": "ramassage",
+        "title": "Ramassage Wemogas",
+        "desc": "Wemogas passe récupérer sa commande.",
+        "start": "13:30",
+        "end": "13:45",
+        "completed": false
+      },
+      {
+        "id": 17,
+        "type": "commandes",
+        "title": "Commander fromage",
+        "desc": "Commande de fromage pour la semaine suivante.",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": false
+      }
+    ],
+    "5": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "6:15",
+        "end": "6:30",
+        "completed": false
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "06:30",
+        "end": "07:00",
+        "completed": false
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor",
+        "desc": "Réception Colabor (a partir du mardi précédent)",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP",
+        "desc": "Réception VP (a partir du mercredi précédent)",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": false
+      },
+      {
+        "id": 206,
+        "type": "reception",
+        "title": "Décaries",
+        "desc": "Réception comptoir",
+        "start": "11:00",
+        "end": "11:15",
+        "completed": false
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes vers 13h",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir – Ramassage",
+        "desc": "Ramassage comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false
+      },
+      {
+        "id": 209,
+        "type": "reception",
+        "title": "Yanco",
+        "desc": "Réception produits Yanco",
+        "start": "06:15",
+        "end": "06:30",
+        "completed": false
+      },
+      {
+        "id": 210,
+        "type": "commandes",
+        "title": "Red Bull",
+        "desc": "Commander le Red Bull reception mardi",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 211,
+        "type": "commandes",
+        "title": "Perron",
+        "desc": "Commander le fromage reception lundi",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": false
+      },
+      {
+        "id": 212,
+        "type": "commandes",
+        "title": "Dubuc",
+        "desc": "Commander légumes",
+        "start": "8:00",
+        "end": "8:30",
+        "completed": false
+      },
+      {
+        "id": 213,
+        "type": "reception",
+        "title": "Sawbase",
+        "desc": "Pour le comptoir",
+        "start": "8:30",
+        "end": "8:15",
+        "completed": false
+      },
+      {
+        "id": 214,
+        "type": "livraison",
+        "title": "Train",
+        "desc": "Livraison au train",
+        "start": "12:30",
+        "end": "1:30",
+        "completed": false
+      },
+      {
+        "id": 215,
+        "type": "prep",
+        "title": "Inventaire",
+        "desc": "Faire l'inventaire entrepot",
+        "start": "11h15",
+        "end": "12:00",
+        "completed": false
+      }
+    ]
+  },
+  "days": {
+    "2025-11-07": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "6:15",
+        "end": "6:30",
+        "completed": false
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "06:30",
+        "end": "07:00",
+        "completed": false
+      },
+      {
+        "id": 202,
+        "type": "livraison",
+        "title": "Livraison fromage",
+        "desc": "Tournée de livraison de fromage",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor – Écoles",
+        "desc": "Réception Colabor pour les écoles",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP – Réception VP",
+        "desc": "Réception VP (produits variés)",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": false
+      },
+      {
+        "id": 205,
+        "type": "ramassage",
+        "title": "Wemok – Ramassage palettes",
+        "desc": "Ramassage de palettes par Wemok",
+        "start": "10:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 206,
+        "type": "reception",
+        "title": "Décaries",
+        "desc": "Réception pour le comptoir",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes Dubuc",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir – Ramassage palettes",
+        "desc": "Ramassage de palettes du comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false
+      },
+      {
+        "id": 209,
+        "type": "reception",
+        "title": "Yanco",
+        "desc": "Produits Yanco",
+        "start": "06:15",
+        "end": "06:30",
+        "completed": false
+      }
+    ],
+    "thu_2025-12-11": [
+      {
+        "id": 1,
+        "type": "prep",
+        "title": "Préparation de la journée",
+        "desc": "Organisation du plancher, mise en place des bacs, vérification des commandes.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false,
+        "startMin": 420,
+        "endMin": 515,
+        "duration": 95
+      },
+      {
+        "id": 2,
+        "type": "montage",
+        "title": "Début du montage des commandes",
+        "desc": "Montage des commandes web et boutiques pour la journée.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false,
+        "startMin": 420,
+        "endMin": 465,
+        "duration": 45
+      },
+      {
+        "id": 3,
+        "type": "reception",
+        "title": "Arrivée Pain Pomme",
+        "desc": "Réception et rangement rapide.",
+        "start": "07:45",
+        "end": "08:00",
+        "completed": false,
+        "startMin": 465,
+        "endMin": 480,
+        "duration": 15
+      },
+      {
+        "id": 4,
+        "type": "reception",
+        "title": "Arrivée Jardin du Saguenay (fromage)",
+        "desc": "Vérification des quantités et mise en chambre froide.",
+        "start": "08:15",
+        "end": "08:30",
+        "completed": false,
+        "startMin": 495,
+        "endMin": 510,
+        "duration": 15
+      },
+      {
+        "id": 5,
+        "type": "reception",
+        "title": "Arrivée Gordon",
+        "desc": "Déchargement, vérification et rangement.",
+        "start": "08:30",
+        "end": "08:45",
+        "completed": false,
+        "startMin": 510,
+        "endMin": 525,
+        "duration": 15
+      },
+      {
+        "id": 6,
+        "type": "montage",
+        "title": "Montage des commandes",
+        "desc": "Avancement des commandes après les réceptions du matin.",
+        "start": "08:30",
+        "end": "09:00",
+        "completed": false,
+        "startMin": 510,
+        "endMin": 540,
+        "duration": 30
+      },
+      {
+        "id": 7,
+        "type": "livraison",
+        "title": "Livraison du fromage frais",
+        "desc": "Livraison du fromage dans les établissements prévus.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false,
+        "startMin": 540,
+        "endMin": 630,
+        "duration": 90
+      },
+      {
+        "id": 8,
+        "type": "montage",
+        "title": "Montage des commandes (bloc continu)",
+        "desc": "Montage intensif, préparation des bacs et des caisses.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false,
+        "startMin": 540,
+        "endMin": 630,
+        "duration": 90
+      },
+      {
+        "id": 9,
+        "type": "reception",
+        "title": "Arrivée Club Entrepôt",
+        "desc": "Réception du stock et mise en inventaire.",
+        "start": "10:00",
+        "end": "10:15",
+        "completed": false,
+        "startMin": 600,
+        "endMin": 615,
+        "duration": 15
+      },
+      {
+        "id": 10,
+        "type": "montage",
+        "title": "Montage des commandes en cours",
+        "desc": "Finalisation des commandes montées le matin.",
+        "start": "10:30",
+        "end": "11:00",
+        "completed": false,
+        "startMin": 630,
+        "endMin": 660,
+        "duration": 30
+      },
+      {
+        "id": 11,
+        "type": "livraison",
+        "title": "Livraison Coop",
+        "desc": "Livraison prévue pour la Coop.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false,
+        "startMin": 660,
+        "endMin": 680,
+        "duration": 20
+      },
+      {
+        "id": 12,
+        "type": "ramassage",
+        "title": "Ramassage Wemok",
+        "desc": "Wemok passe récupérer sa commande.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false,
+        "startMin": 660,
+        "endMin": 680,
+        "duration": 20
+      },
+      {
+        "id": 13,
+        "type": "montage",
+        "title": "Montage final des commandes du matin",
+        "desc": "Compléter les commandes, étiquettes, préparation des bacs.",
+        "start": "11:20",
+        "end": "11:55",
+        "completed": false,
+        "startMin": 680,
+        "endMin": 715,
+        "duration": 35
+      },
+      {
+        "id": 14,
+        "type": "ramassage",
+        "title": "Ramassage Relais 22",
+        "desc": "Relais 22 passe récupérer sa commande.",
+        "start": "12:00",
+        "end": "12:15",
+        "completed": false,
+        "startMin": 720,
+        "endMin": 735,
+        "duration": 15
+      },
+      {
+        "id": 15,
+        "type": "montage",
+        "title": "Gros bloc de montage des commandes",
+        "desc": "Préparation des commandes PM et du lendemain, organisation de l’espace.",
+        "start": "12:15",
+        "end": "13:20",
+        "completed": false,
+        "startMin": 735,
+        "endMin": 800,
+        "duration": 65
+      },
+      {
+        "id": 16,
+        "type": "ramassage",
+        "title": "Ramassage Wemogas",
+        "desc": "Wemogas passe récupérer sa commande.",
+        "start": "13:30",
+        "end": "13:45",
+        "completed": false,
+        "startMin": 810,
+        "endMin": 825,
+        "duration": 15
+      },
+      {
+        "id": 17,
+        "type": "commandes",
+        "title": "Commander fromage",
+        "desc": "Commande de fromage pour la semaine suivante.",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": false,
+        "startMin": 780,
+        "endMin": 810,
+        "duration": 30
+      }
+    ],
+    "2025-11-28": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "6:15",
+        "end": "6:30",
+        "completed": false
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "06:30",
+        "end": "07:00",
+        "completed": false
+      },
+      {
+        "id": 202,
+        "type": "livraison",
+        "title": "Livraison fromage",
+        "desc": "Tournée de livraison de fromage",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor – Écoles",
+        "desc": "Réception Colabor pour les écoles",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP – Réception VP",
+        "desc": "Réception VP (produits variés)",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": false
+      },
+      {
+        "id": 205,
+        "type": "ramassage",
+        "title": "Wemok – Ramassage palettes",
+        "desc": "Ramassage de palettes par Wemok",
+        "start": "10:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 206,
+        "type": "reception",
+        "title": "Décaries",
+        "desc": "Réception pour le comptoir",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes Dubuc",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir – Ramassage palettes",
+        "desc": "Ramassage de palettes du comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false
+      },
+      {
+        "id": 209,
+        "type": "reception",
+        "title": "Yanco",
+        "desc": "Produits Yanco",
+        "start": "06:15",
+        "end": "06:30",
+        "completed": false
+      }
+    ],
+    "2025-11-14": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "6:15",
+        "end": "6:30",
+        "completed": false
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "06:30",
+        "end": "07:00",
+        "completed": false
+      },
+      {
+        "id": 202,
+        "type": "livraison",
+        "title": "Livraison fromage",
+        "desc": "Tournée de livraison de fromage",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor – Écoles",
+        "desc": "Réception Colabor pour les écoles",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP – Réception VP",
+        "desc": "Réception VP (produits variés)",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": false
+      },
+      {
+        "id": 205,
+        "type": "ramassage",
+        "title": "Wemok – Ramassage palettes",
+        "desc": "Ramassage de palettes par Wemok",
+        "start": "10:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 206,
+        "type": "reception",
+        "title": "Décaries",
+        "desc": "Réception pour le comptoir",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes Dubuc",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir – Ramassage palettes",
+        "desc": "Ramassage de palettes du comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false
+      },
+      {
+        "id": 209,
+        "type": "reception",
+        "title": "Yanco",
+        "desc": "Produits Yanco",
+        "start": "06:15",
+        "end": "06:30",
+        "completed": false
+      }
+    ],
+    "2025-11-21": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "6:15",
+        "end": "6:30",
+        "completed": false
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "06:30",
+        "end": "07:00",
+        "completed": false
+      },
+      {
+        "id": 202,
+        "type": "livraison",
+        "title": "Livraison fromage",
+        "desc": "Tournée de livraison de fromage",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor – Écoles",
+        "desc": "Réception Colabor pour les écoles",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP – Réception VP",
+        "desc": "Réception VP (produits variés)",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": false
+      },
+      {
+        "id": 205,
+        "type": "ramassage",
+        "title": "Wemok – Ramassage palettes",
+        "desc": "Ramassage de palettes par Wemok",
+        "start": "10:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 206,
+        "type": "reception",
+        "title": "Décaries",
+        "desc": "Réception pour le comptoir",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes Dubuc",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir – Ramassage palettes",
+        "desc": "Ramassage de palettes du comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false
+      },
+      {
+        "id": 209,
+        "type": "reception",
+        "title": "Yanco",
+        "desc": "Produits Yanco",
+        "start": "06:15",
+        "end": "06:30",
+        "completed": false
+      }
+    ],
+    "2025-12-01": [],
+    "thu_2025-12-04": [
+      {
+        "id": 1,
+        "type": "prep",
+        "title": "Préparation de la journée",
+        "desc": "Organisation du plancher, mise en place des bacs, vérification des commandes.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false,
+        "startMin": 420,
+        "endMin": 735,
+        "duration": 315
+      },
+      {
+        "id": 2,
+        "type": "montage",
+        "title": "Début du montage des commandes",
+        "desc": "Montage des commandes web et boutiques pour la journée.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false,
+        "startMin": 420,
+        "endMin": 465,
+        "duration": 45
+      },
+      {
+        "id": 3,
+        "type": "reception",
+        "title": "Arrivée Pain Pomme",
+        "desc": "Réception et rangement rapide.",
+        "start": "07:45",
+        "end": "08:00",
+        "completed": false,
+        "startMin": 465,
+        "endMin": 480,
+        "duration": 15
+      },
+      {
+        "id": 4,
+        "type": "reception",
+        "title": "Arrivée Jardin du Saguenay (fromage)",
+        "desc": "Vérification des quantités et mise en chambre froide.",
+        "start": "08:15",
+        "end": "08:30",
+        "completed": false,
+        "startMin": 495,
+        "endMin": 510,
+        "duration": 15
+      },
+      {
+        "id": 5,
+        "type": "reception",
+        "title": "Arrivée Gordon",
+        "desc": "Déchargement, vérification et rangement.",
+        "start": "08:30",
+        "end": "08:45",
+        "completed": false,
+        "startMin": 510,
+        "endMin": 525,
+        "duration": 15
+      },
+      {
+        "id": 6,
+        "type": "montage",
+        "title": "Montage des commandes",
+        "desc": "Avancement des commandes après les réceptions du matin.",
+        "start": "08:30",
+        "end": "09:00",
+        "completed": false,
+        "startMin": 510,
+        "endMin": 540,
+        "duration": 30
+      },
+      {
+        "id": 7,
+        "type": "livraison",
+        "title": "Livraison du fromage frais",
+        "desc": "Livraison du fromage dans les établissements prévus.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false,
+        "startMin": 540,
+        "endMin": 630,
+        "duration": 90
+      },
+      {
+        "id": 8,
+        "type": "montage",
+        "title": "Montage des commandes (bloc continu)",
+        "desc": "Montage intensif, préparation des bacs et des caisses.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false,
+        "startMin": 540,
+        "endMin": 630,
+        "duration": 90
+      },
+      {
+        "id": 9,
+        "type": "reception",
+        "title": "Arrivée Club Entrepôt",
+        "desc": "Réception du stock et mise en inventaire.",
+        "start": "10:00",
+        "end": "10:15",
+        "completed": false,
+        "startMin": 600,
+        "endMin": 615,
+        "duration": 15
+      },
+      {
+        "id": 10,
+        "type": "montage",
+        "title": "Montage des commandes en cours",
+        "desc": "Finalisation des commandes montées le matin.",
+        "start": "10:30",
+        "end": "11:00",
+        "completed": false,
+        "startMin": 630,
+        "endMin": 660,
+        "duration": 30
+      },
+      {
+        "id": 11,
+        "type": "livraison",
+        "title": "Livraison Coop",
+        "desc": "Livraison prévue pour la Coop.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false,
+        "startMin": 660,
+        "endMin": 680,
+        "duration": 20
+      },
+      {
+        "id": 12,
+        "type": "ramassage",
+        "title": "Ramassage Wemok",
+        "desc": "Wemok passe récupérer sa commande.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false,
+        "startMin": 660,
+        "endMin": 680,
+        "duration": 20
+      },
+      {
+        "id": 13,
+        "type": "montage",
+        "title": "Montage final des commandes du matin",
+        "desc": "Compléter les commandes, étiquettes, préparation des bacs.",
+        "start": "11:20",
+        "end": "11:55",
+        "completed": false,
+        "startMin": 680,
+        "endMin": 715,
+        "duration": 35
+      },
+      {
+        "id": 14,
+        "type": "ramassage",
+        "title": "Ramassage Relais 22",
+        "desc": "Relais 22 passe récupérer sa commande.",
+        "start": "12:00",
+        "end": "12:15",
+        "completed": false,
+        "startMin": 720,
+        "endMin": 740,
+        "duration": 20
+      },
+      {
+        "id": 15,
+        "type": "montage",
+        "title": "Gros bloc de montage des commandes",
+        "desc": "Préparation des commandes PM et du lendemain, organisation de l’espace.",
+        "start": "12:15",
+        "end": "13:20",
+        "completed": false,
+        "startMin": 720,
+        "endMin": 785,
+        "duration": 65
+      },
+      {
+        "id": 16,
+        "type": "ramassage",
+        "title": "Ramassage Wemogas",
+        "desc": "Wemogas passe récupérer sa commande.",
+        "start": "13:30",
+        "end": "13:45",
+        "completed": false,
+        "startMin": 810,
+        "endMin": 825,
+        "duration": 15
+      },
+      {
+        "id": 17,
+        "type": "commandes",
+        "title": "Commander fromage",
+        "desc": "Commande de fromage pour la semaine suivante.",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": false,
+        "startMin": 780,
+        "endMin": 810,
+        "duration": 30
+      }
+    ],
+    "2025-12-12": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "07:00",
+        "end": "07:15",
+        "completed": false,
+        "startMin": 420,
+        "endMin": 435,
+        "duration": 15
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "06:30",
+        "end": "07:00",
+        "completed": false,
+        "startMin": 390,
+        "endMin": 420,
+        "duration": 30
+      },
+      {
+        "id": 202,
+        "type": "livraison",
+        "title": "Livraison fromage",
+        "desc": "Tournée de livraison de fromage",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false,
+        "startMin": 540,
+        "endMin": 630,
+        "duration": 90
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor – Écoles",
+        "desc": "Réception Colabor pour les écoles",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false,
+        "startMin": 600,
+        "endMin": 620,
+        "duration": 20
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP – Réception VP",
+        "desc": "Réception VP (produits variés)",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": false,
+        "startMin": 630,
+        "endMin": 650,
+        "duration": 20
+      },
+      {
+        "id": 205,
+        "type": "ramassage",
+        "title": "Wemok – Ramassage palettes",
+        "desc": "Ramassage de palettes par Wemok",
+        "start": "10:00",
+        "end": "10:30",
+        "completed": false,
+        "startMin": 600,
+        "endMin": 630,
+        "duration": 30
+      },
+      {
+        "id": 206,
+        "type": "reception",
+        "title": "Bruno & Fils",
+        "desc": "Réception pour le comptoir",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false,
+        "startMin": 780,
+        "endMin": 795,
+        "duration": 15
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes Dubuc",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false,
+        "startMin": 780,
+        "endMin": 795,
+        "duration": 15
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir – Ramassage palettes",
+        "desc": "Ramassage de palettes du comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false,
+        "startMin": 840,
+        "endMin": 870,
+        "duration": 30
+      }
+    ],
+    "2025-12-03": [],
+    "2025-12-04": [
+      {
+        "id": 1,
+        "type": "prep",
+        "title": "Préparation de la journée",
+        "desc": "Organisation du plancher, mise en place des bacs, vérification des commandes.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": true,
+        "startMin": 420,
+        "endMin": 465,
+        "duration": 45
+      },
+      {
+        "id": 2,
+        "type": "montage",
+        "title": "Début du montage des commandes",
+        "desc": "Montage des commandes web et boutiques pour la journée.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": true,
+        "startMin": 420,
+        "endMin": 465,
+        "duration": 45
+      },
+      {
+        "id": 3,
+        "type": "reception",
+        "title": "Arrivée Pain Pomme",
+        "desc": "Réception et rangement rapide.",
+        "start": "07:45",
+        "end": "08:00",
+        "completed": true,
+        "startMin": 465,
+        "endMin": 480,
+        "duration": 15
+      },
+      {
+        "id": 4,
+        "type": "reception",
+        "title": "Arrivée Jardin du Saguenay (fromage)",
+        "desc": "Vérification des quantités et mise en chambre froide.",
+        "start": "08:15",
+        "end": "08:30",
+        "completed": true,
+        "startMin": 495,
+        "endMin": 510,
+        "duration": 15
+      },
+      {
+        "id": 5,
+        "type": "reception",
+        "title": "Arrivée Gordon",
+        "desc": "Déchargement, vérification et rangement.",
+        "start": "08:30",
+        "end": "08:45",
+        "completed": true,
+        "startMin": 510,
+        "endMin": 525,
+        "duration": 15
+      },
+      {
+        "id": 6,
+        "type": "montage",
+        "title": "Montage des commandes",
+        "desc": "Avancement des commandes après les réceptions du matin.",
+        "start": "08:30",
+        "end": "09:00",
+        "completed": true,
+        "startMin": 510,
+        "endMin": 540,
+        "duration": 30
+      },
+      {
+        "id": 7,
+        "type": "livraison",
+        "title": "Livraison du fromage frais",
+        "desc": "Livraison du fromage dans les établissements prévus.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": true,
+        "startMin": 540,
+        "endMin": 630,
+        "duration": 90
+      },
+      {
+        "id": 8,
+        "type": "montage",
+        "title": "Montage des commandes (bloc continu)",
+        "desc": "Montage intensif, préparation des bacs et des caisses.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": true,
+        "startMin": 540,
+        "endMin": 630,
+        "duration": 90
+      },
+      {
+        "id": 9,
+        "type": "reception",
+        "title": "Arrivée Club Entrepôt",
+        "desc": "Réception du stock et mise en inventaire.",
+        "start": "10:00",
+        "end": "10:15",
+        "completed": true,
+        "startMin": 600,
+        "endMin": 615,
+        "duration": 15
+      },
+      {
+        "id": 10,
+        "type": "montage",
+        "title": "Montage des commandes en cours",
+        "desc": "Finalisation des commandes montées le matin.",
+        "start": "10:30",
+        "end": "11:00",
+        "completed": true,
+        "startMin": 630,
+        "endMin": 660,
+        "duration": 30
+      },
+      {
+        "id": 11,
+        "type": "livraison",
+        "title": "Livraison Coop",
+        "desc": "Livraison prévue pour la Coop.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": true,
+        "startMin": 660,
+        "endMin": 680,
+        "duration": 20
+      },
+      {
+        "id": 12,
+        "type": "ramassage",
+        "title": "Ramassage Wemok",
+        "desc": "Wemok passe récupérer sa commande.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": true,
+        "startMin": 660,
+        "endMin": 680,
+        "duration": 20
+      },
+      {
+        "id": 14,
+        "type": "ramassage",
+        "title": "Ramassage Relais 22",
+        "desc": "Relais 22 passe récupérer sa commande.",
+        "start": "12:00",
+        "end": "12:15",
+        "completed": true,
+        "startMin": 720,
+        "endMin": 735,
+        "duration": 15
+      },
+      {
+        "id": 15,
+        "type": "montage",
+        "title": "Gros bloc de montage des commandes",
+        "desc": "Préparation des commandes PM et du lendemain, organisation de l’espace.",
+        "start": "12:15",
+        "end": "13:20",
+        "completed": true,
+        "startMin": 735,
+        "endMin": 800,
+        "duration": 65
+      },
+      {
+        "id": 16,
+        "type": "ramassage",
+        "title": "Ramassage Wemogas",
+        "desc": "Wemogas passe récupérer sa commande.",
+        "start": "13:30",
+        "end": "13:45",
+        "completed": true,
+        "startMin": 810,
+        "endMin": 825,
+        "duration": 15
+      },
+      {
+        "id": 17,
+        "type": "commandes",
+        "title": "Commander fromage",
+        "desc": "Commande de fromage pour la semaine suivante.",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": true,
+        "startMin": 780,
+        "endMin": 810,
+        "duration": 30
+      }
+    ],
+    "thu_2025-12-18": [
+      {
+        "id": 1,
+        "type": "prep",
+        "title": "Préparation de la journée",
+        "desc": "Organisation du plancher, mise en place des bacs, vérification des commandes.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "type": "montage",
+        "title": "Début du montage des commandes",
+        "desc": "Montage des commandes web et boutiques pour la journée.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "type": "reception",
+        "title": "Arrivée Pain Pomme",
+        "desc": "Réception et rangement rapide.",
+        "start": "07:45",
+        "end": "08:00",
+        "completed": false
+      },
+      {
+        "id": 4,
+        "type": "reception",
+        "title": "Arrivée Jardin du Saguenay (fromage)",
+        "desc": "Vérification des quantités et mise en chambre froide.",
+        "start": "08:15",
+        "end": "08:30",
+        "completed": false
+      },
+      {
+        "id": 5,
+        "type": "reception",
+        "title": "Arrivée Gordon",
+        "desc": "Déchargement, vérification et rangement.",
+        "start": "08:30",
+        "end": "08:45",
+        "completed": false
+      },
+      {
+        "id": 6,
+        "type": "montage",
+        "title": "Montage des commandes",
+        "desc": "Avancement des commandes après les réceptions du matin.",
+        "start": "08:30",
+        "end": "09:00",
+        "completed": false
+      },
+      {
+        "id": 7,
+        "type": "livraison",
+        "title": "Livraison du fromage frais",
+        "desc": "Livraison du fromage dans les établissements prévus.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 8,
+        "type": "montage",
+        "title": "Montage des commandes (bloc continu)",
+        "desc": "Montage intensif, préparation des bacs et des caisses.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 9,
+        "type": "reception",
+        "title": "Arrivée Club Entrepôt",
+        "desc": "Réception du stock et mise en inventaire.",
+        "start": "10:00",
+        "end": "10:15",
+        "completed": false
+      },
+      {
+        "id": 10,
+        "type": "montage",
+        "title": "Montage des commandes en cours",
+        "desc": "Finalisation des commandes montées le matin.",
+        "start": "10:30",
+        "end": "11:00",
+        "completed": false
+      },
+      {
+        "id": 11,
+        "type": "livraison",
+        "title": "Livraison Coop",
+        "desc": "Livraison prévue pour la Coop.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 12,
+        "type": "ramassage",
+        "title": "Ramassage Wemok",
+        "desc": "Wemok passe récupérer sa commande.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 13,
+        "type": "montage",
+        "title": "Montage final des commandes du matin",
+        "desc": "Compléter les commandes, étiquettes, préparation des bacs.",
+        "start": "11:20",
+        "end": "11:55",
+        "completed": false
+      },
+      {
+        "id": 14,
+        "type": "ramassage",
+        "title": "Ramassage Relais 22",
+        "desc": "Relais 22 passe récupérer sa commande.",
+        "start": "12:00",
+        "end": "12:15",
+        "completed": false
+      },
+      {
+        "id": 15,
+        "type": "montage",
+        "title": "Gros bloc de montage des commandes",
+        "desc": "Préparation des commandes PM et du lendemain, organisation de l’espace.",
+        "start": "12:15",
+        "end": "13:20",
+        "completed": false
+      },
+      {
+        "id": 16,
+        "type": "ramassage",
+        "title": "Ramassage Wemogas",
+        "desc": "Wemogas passe récupérer sa commande.",
+        "start": "13:30",
+        "end": "13:45",
+        "completed": false
+      },
+      {
+        "id": 17,
+        "type": "commandes",
+        "title": "Commander fromage",
+        "desc": "Commande de fromage pour la semaine suivante.",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": false
+      }
+    ],
+    "2025-12-05": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "07:00",
+        "end": "07:15",
+        "completed": true,
+        "startMin": 390,
+        "endMin": 420,
+        "duration": 30
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "08:00",
+        "end": "08:15",
+        "completed": true,
+        "startMin": 375,
+        "endMin": 405,
+        "duration": 30
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor",
+        "desc": "Réception Colabor pour les écoles",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false,
+        "startMin": 600,
+        "endMin": 620,
+        "duration": 20
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP",
+        "desc": "Réception VP (produits variés)",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": true,
+        "startMin": 630,
+        "endMin": 650,
+        "duration": 20
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes Dubuc",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false,
+        "startMin": 780,
+        "endMin": 795,
+        "duration": 15
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir",
+        "desc": "Ramassage de palettes du comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false,
+        "startMin": 840,
+        "endMin": 870,
+        "duration": 30
+      },
+      {
+        "id": 209,
+        "type": "reception",
+        "title": "Yanco",
+        "desc": "Reception Produits Yanco",
+        "start": "6:15",
+        "end": "6:30",
+        "startMin": 375,
+        "endMin": 390,
+        "duration": 15,
+        "completed": true
+      },
+      {
+        "id": 210,
+        "type": "reception",
+        "title": "Décaries",
+        "desc": "reception Décaries",
+        "start": "11h00",
+        "end": "11h15",
+        "startMin": 660,
+        "endMin": 680,
+        "duration": 20,
+        "completed": false
+      },
+      {
+        "id": 211,
+        "type": "commandes",
+        "title": "Red bull",
+        "desc": "commande Red Bull",
+        "start": "11h00",
+        "end": "11h15",
+        "startMin": 660,
+        "endMin": 675,
+        "duration": 15,
+        "completed": true
+      },
+      {
+        "id": 212,
+        "type": "commandes",
+        "title": "Perron",
+        "desc": "Commander le fromage pour lundi",
+        "start": "13h00",
+        "end": "13h30",
+        "startMin": 780,
+        "endMin": 810,
+        "duration": 30,
+        "completed": false
+      },
+      {
+        "id": 213,
+        "type": "commandes",
+        "title": "Dubuc",
+        "desc": "Commander les légumes pour réception vers 13h",
+        "start": "8h00",
+        "end": "8h30",
+        "startMin": 480,
+        "endMin": 510,
+        "duration": 30,
+        "completed": true
+      },
+      {
+        "id": 214,
+        "type": "reception",
+        "title": "sawbase",
+        "desc": "",
+        "start": "8:30",
+        "end": "9:15",
+        "startMin": 560,
+        "endMin": 620,
+        "duration": 60,
+        "completed": true
+      },
+      {
+        "id": 215,
+        "type": "livraison",
+        "title": "Train",
+        "desc": "Livraison au train",
+        "start": "14:00",
+        "end": "15:00",
+        "startMin": 840,
+        "endMin": 900,
+        "duration": 60,
+        "completed": false
+      },
+      {
+        "id": 216,
+        "type": "livraison",
+        "title": "livraison coq",
+        "desc": "",
+        "start": "12h00",
+        "end": "13h00",
+        "startMin": 705,
+        "endMin": 720,
+        "duration": 15,
+        "completed": false
+      },
+      {
+        "id": 217,
+        "type": "livraison",
+        "title": "livraison voute",
+        "desc": "",
+        "start": "12h00",
+        "end": "13h00",
+        "startMin": 725,
+        "endMin": 740,
+        "duration": 15,
+        "completed": false
+      },
+      {
+        "id": 218,
+        "type": "livraison",
+        "title": "la tuquois",
+        "desc": "",
+        "start": "12h00",
+        "end": "13h00",
+        "startMin": 740,
+        "endMin": 755,
+        "duration": 15,
+        "completed": false
+      },
+      {
+        "id": 219,
+        "type": "livraison",
+        "title": "taxi",
+        "desc": "",
+        "start": "12h00",
+        "end": "13h00",
+        "startMin": 755,
+        "endMin": 770,
+        "duration": 15,
+        "completed": false
+      },
+      {
+        "id": 220,
+        "type": "ramassage",
+        "title": "yves",
+        "desc": "",
+        "start": "12h00",
+        "end": "13h00",
+        "startMin": 630,
+        "endMin": 690,
+        "duration": 60,
+        "completed": false
+      },
+      {
+        "id": 221,
+        "type": "livraison",
+        "title": "depan o max",
+        "desc": "",
+        "start": "12h00",
+        "end": "12h15",
+        "startMin": 780,
+        "endMin": 795,
+        "duration": 15,
+        "completed": false
+      },
+      {
+        "id": 222,
+        "type": "prep",
+        "title": "Inventaire",
+        "desc": "",
+        "start": "11h15",
+        "end": "12h00",
+        "startMin": 675,
+        "endMin": 720,
+        "duration": 45,
+        "completed": false
+      }
+    ],
+    "2025-12-02": [],
+    "2025-12-11": [
+      {
+        "id": 1,
+        "type": "prep",
+        "title": "Préparation de la journée",
+        "desc": "Organisation du plancher, mise en place des bacs, vérification des commandes.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false
+      },
+      {
+        "id": 2,
+        "type": "montage",
+        "title": "Début du montage des commandes",
+        "desc": "Montage des commandes web et boutiques pour la journée.",
+        "start": "07:00",
+        "end": "07:45",
+        "completed": false
+      },
+      {
+        "id": 3,
+        "type": "reception",
+        "title": "Arrivée Pain Pomme",
+        "desc": "Réception et rangement rapide.",
+        "start": "07:45",
+        "end": "08:00",
+        "completed": false
+      },
+      {
+        "id": 4,
+        "type": "reception",
+        "title": "Arrivée Jardin du Saguenay (fromage)",
+        "desc": "Vérification des quantités et mise en chambre froide.",
+        "start": "08:15",
+        "end": "08:30",
+        "completed": false
+      },
+      {
+        "id": 5,
+        "type": "reception",
+        "title": "Arrivée Gordon",
+        "desc": "Déchargement, vérification et rangement.",
+        "start": "08:30",
+        "end": "08:45",
+        "completed": false
+      },
+      {
+        "id": 6,
+        "type": "montage",
+        "title": "Montage des commandes",
+        "desc": "Avancement des commandes après les réceptions du matin.",
+        "start": "08:30",
+        "end": "09:00",
+        "completed": false
+      },
+      {
+        "id": 7,
+        "type": "livraison",
+        "title": "Livraison du fromage frais",
+        "desc": "Livraison du fromage dans les établissements prévus.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 8,
+        "type": "montage",
+        "title": "Montage des commandes (bloc continu)",
+        "desc": "Montage intensif, préparation des bacs et des caisses.",
+        "start": "09:00",
+        "end": "10:30",
+        "completed": false
+      },
+      {
+        "id": 9,
+        "type": "reception",
+        "title": "Arrivée Club Entrepôt",
+        "desc": "Réception du stock et mise en inventaire.",
+        "start": "10:00",
+        "end": "10:15",
+        "completed": false
+      },
+      {
+        "id": 10,
+        "type": "montage",
+        "title": "Montage des commandes en cours",
+        "desc": "Finalisation des commandes montées le matin.",
+        "start": "10:30",
+        "end": "11:00",
+        "completed": false
+      },
+      {
+        "id": 11,
+        "type": "livraison",
+        "title": "Livraison Coop",
+        "desc": "Livraison prévue pour la Coop.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 12,
+        "type": "ramassage",
+        "title": "Ramassage Wemok",
+        "desc": "Wemok passe récupérer sa commande.",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 13,
+        "type": "montage",
+        "title": "Montage final des commandes du matin",
+        "desc": "Compléter les commandes, étiquettes, préparation des bacs.",
+        "start": "11:20",
+        "end": "11:55",
+        "completed": false
+      },
+      {
+        "id": 14,
+        "type": "ramassage",
+        "title": "Ramassage Relais 22",
+        "desc": "Relais 22 passe récupérer sa commande.",
+        "start": "12:00",
+        "end": "12:15",
+        "completed": false
+      },
+      {
+        "id": 15,
+        "type": "montage",
+        "title": "Gros bloc de montage des commandes",
+        "desc": "Préparation des commandes PM et du lendemain, organisation de l’espace.",
+        "start": "12:15",
+        "end": "13:20",
+        "completed": false
+      },
+      {
+        "id": 16,
+        "type": "ramassage",
+        "title": "Ramassage Wemogas",
+        "desc": "Wemogas passe récupérer sa commande.",
+        "start": "13:30",
+        "end": "13:45",
+        "completed": false
+      },
+      {
+        "id": 17,
+        "type": "commandes",
+        "title": "Commander fromage",
+        "desc": "Commande de fromage pour la semaine suivante.",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": false
+      }
+    ],
+    "2025-12-19": [
+      {
+        "id": 200,
+        "type": "reception",
+        "title": "Agropur – Lait",
+        "desc": "Réception Agropur : lait",
+        "start": "6:15",
+        "end": "6:30",
+        "completed": false
+      },
+      {
+        "id": 201,
+        "type": "reception",
+        "title": "Perron – Fromage",
+        "desc": "Réception fromage Perron",
+        "start": "06:30",
+        "end": "07:00",
+        "completed": false
+      },
+      {
+        "id": 203,
+        "type": "reception",
+        "title": "Colabor",
+        "desc": "Réception Colabor",
+        "start": "10:00",
+        "end": "10:20",
+        "completed": false
+      },
+      {
+        "id": 204,
+        "type": "reception",
+        "title": "VP",
+        "desc": "Réception VP",
+        "start": "10:30",
+        "end": "10:50",
+        "completed": false
+      },
+      {
+        "id": 206,
+        "type": "reception",
+        "title": "Décaries",
+        "desc": "Réception comptoir",
+        "start": "11:00",
+        "end": "11:15",
+        "completed": false
+      },
+      {
+        "id": 207,
+        "type": "reception",
+        "title": "Dubuc – Fruits & Légumes",
+        "desc": "Réception fruits et légumes vers 13h",
+        "start": "13:00",
+        "end": "13:15",
+        "completed": false
+      },
+      {
+        "id": 208,
+        "type": "ramassage",
+        "title": "Comptoir – Ramassage",
+        "desc": "Ramassage comptoir",
+        "start": "14:00",
+        "end": "14:30",
+        "completed": false
+      },
+      {
+        "id": 209,
+        "type": "reception",
+        "title": "Yanco",
+        "desc": "Réception produits Yanco",
+        "start": "06:15",
+        "end": "06:30",
+        "completed": false
+      },
+      {
+        "id": 210,
+        "type": "commandes",
+        "title": "Red Bull",
+        "desc": "Commander le Red Bull reception mardi",
+        "start": "11:00",
+        "end": "11:20",
+        "completed": false
+      },
+      {
+        "id": 211,
+        "type": "commandes",
+        "title": "Perron",
+        "desc": "Commander le fromage reception lundi",
+        "start": "13:00",
+        "end": "13:30",
+        "completed": false
+      },
+      {
+        "id": 212,
+        "type": "commandes",
+        "title": "Dubuc",
+        "desc": "Commander légumes",
+        "start": "8:00",
+        "end": "8:30",
+        "completed": false
+      },
+      {
+        "id": 213,
+        "type": "reception",
+        "title": "Sawbase",
+        "desc": "Pour le comptoir",
+        "start": "8:30",
+        "end": "8:15",
+        "completed": false
+      },
+      {
+        "id": 214,
+        "type": "livraison",
+        "title": "Train",
+        "desc": "Livraison au train",
+        "start": "12:30",
+        "end": "1:30",
+        "completed": false
+      }
+    ]
+  }
+}
