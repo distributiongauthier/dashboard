@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Timeline – Opérations | Distribution Gauthier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg-main: #111111;
+      --bg-panel: #1c1c1c;
+      --bg-header: #00338d;
+      --color-text: #ffffff;
+      --color-livraison: #00338d;
+      --color-reception: #ffcc00;
+      --color-montage: #3baa3f;
+      --color-ramassage: #e53935;
+      --color-prep: #777777;
+      --color-commandes: #9c27b0;
+      --border-soft: #333333;
+      --accent: #00bcd4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #202840 0, #050505 55%);
+      color: var(--color-text);
+      overflow-x: hidden;
+    }
+
+    .dashboard {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 32px 40px;
+    }
+
+    header {
+      background: var(--bg-header);
+      padding: 16px 24px;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    header .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    header .tag-day {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      white-space: nowrap;
+    }
+
+    .day-selector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .day-selector button {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .day-selector button:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    .day-selector span {
+      opacity: 0.9;
+    }
+
+    .backup-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .backup-btn {
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .backup-btn:hover {
+      background: rgba(0,0,0,0.85);
+    }
+
+    .weekday-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+      justify-content: center;
+    }
+
+    .weekday-tab {
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .weekday-tab.active {
+      background: var(--accent);
+      color: #001018;
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      user-select: none;
+      background: rgba(0, 0, 0, 0.4);
+      transition: background 0.15s, opacity 0.15s, transform 0.1s;
+    }
+
+    .legend-item.active {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .legend-item.inactive {
+      opacity: 0.25;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .legend-prep       { background: var(--color-prep); }
+    .legend-montage    { background: var(--color-montage); }
+    .legend-reception  { background: var(--color-reception); }
+    .legend-livraison  { background: var(--color-livraison); }
+    .legend-ramassage  { background: var(--color-ramassage); }
+    .legend-commandes  { background: var(--color-commandes); }
+
+    .panel {
+      background: var(--bg-panel);
+      border-radius: 18px;
+      padding: 16px 18px 18px;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      margin-bottom: 18px;
+    }
+
+    .timeline-scroll {
+      overflow: hidden;
+    }
+
+    .timeline-header {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      column-gap: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-soft);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: rgba(255,255,255,0.7);
+      min-width: 900px;
+    }
+
+    .timeline-header-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hour-ticks {
+      position: relative;
+      height: 24px;
+      margin-left: 6px;
+      will-change: transform;
+    }
+
+    .hour-tick {
+      position: absolute;
+      top: 12px;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+    }
+
+    .hour-tick-line {
+      position: absolute;
+      top: 22px;
+      width: 1px;
+      height: 6px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .timeline-body {
+      margin-top: 10px;
+      max-height: 580px;
+      overflow: auto;
+      min-width: 900px;
+    }
+
+    .task-row {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      column-gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      align-items: center;
+      transition: opacity 0.15s, background 0.15s;
+    }
+
+    .task-row.completed {
+      opacity: 0.4;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .sticky-col,
+    .task-info {
+      position: sticky;
+      left: 0;
+      z-index: 3;
+      background: var(--bg-panel);
+    }
+
+    .task-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-right: 8px;
+    }
+
+    .task-header-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .task-type-pill {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      opacity: 0.85;
+      align-self: flex-start;
+      margin-bottom: 2px;
+    }
+
+    .pill-prep       { border-color: var(--color-prep);      color: var(--color-prep); }
+    .pill-montage    { border-color: var(--color-montage);   color: var(--color-montage); }
+    .pill-reception  { border-color: #fdd835;                color: #fdd835; }
+    .pill-livraison  { border-color: #4fc3f7;                color: #4fc3f7; }
+    .pill-ramassage  { border-color: #ef9a9a;                color: #ef9a9a; }
+    .pill-commandes  { border-color: var(--color-commandes); color: var(--color-commandes); }
+
+    .task-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .task-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .task-time-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.75);
+      margin-top: 2px;
+    }
+
+    .task-title[contenteditable],
+    .task-desc[contenteditable] {
+      outline: none;
+    }
+
+    .task-track {
+      position: relative;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(
+        to right,
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.02)
+      );
+      overflow: hidden;
+    }
+
+    .timeline-grid-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+
+    .task-block {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      border-radius: 999px;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      cursor: grab;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+    }
+
+    .task-block:active { cursor: grabbing; }
+
+    .task-block-prep       { background: var(--color-prep); }
+    .task-block-montage    { background: var(--color-montage); }
+    .task-block-reception  { background: #fdd835; color:#222; }
+    .task-block-livraison  { background: #0288d1; }
+    .task-block-ramassage  { background: #e53935; }
+    .task-block-commandes  { background: var(--color-commandes); }
+
+    .task-block.completed {
+      background: #555555;
+      border-color: #777777;
+      box-shadow: none;
+    }
+
+    .task-block span { pointer-events: none; }
+
+    .resize-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      cursor: ew-resize;
+      background: rgba(0,0,0,0.2);
+      border-radius: 999px;
+    }
+
+    .resize-left  { left: 0;  }
+    .resize-right { right: 0; }
+
+    .resize-handle::after {
+      content: "";
+      position: absolute;
+      top: 25%;
+      bottom: 25%;
+      left: 2px;
+      right: 2px;
+      border-left: 1px solid rgba(255,255,255,0.5);
+      border-right: 1px solid rgba(255,255,255,0.5);
+      opacity: 0.8;
+    }
+
+    .btn-delete {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      border-radius: 999px;
+      padding: 1px 7px;
+      font-size: 10px;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+
+    .btn-delete:hover {
+      color: #fff;
+      border-color: #ff6666;
+      background: rgba(229,57,53,0.25);
+    }
+
+    .btn-complete {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.9);
+      font-size: 10px;
+      padding: 2px 8px;
+      cursor: pointer;
+    }
+
+    .btn-complete:hover {
+      background: rgba(0,0,0,0.8);
+    }
+
+    .btn-complete.is-completed {
+      border-color: #8bc34a;
+      background: rgba(139,195,74,0.15);
+      color: #c5e1a5;
+    }
+
+    .editable-hint {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 10px;
+      text-align: right;
+      font-style: italic;
+    }
+
+    .add-form {
+      margin-top: 18px;
+      padding: 12px 14px 14px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      grid-template-columns: 100px 100px 130px 1fr;
+      grid-auto-rows: auto;
+      gap: 8px 10px;
+      align-items: center;
+    }
+
+    .add-form label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+    }
+
+    .add-form input,
+    .add-form select,
+    .add-form textarea {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(10,10,10,0.8);
+      color: #fff;
+      font-size: 13px;
+      resize: vertical;
+    }
+
+    .add-form textarea { min-height: 40px; }
+
+    .add-form input:focus,
+    .add-form select:focus,
+    .add-form textarea:focus {
+      outline: 1px solid var(--accent);
+      border-color: var(--accent);
+    }
+
+    .add-form .btn-add {
+      grid-column: 1 / -1;
+      justify-self: flex-end;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #001018;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .add-form .btn-add:hover { filter: brightness(1.05); }
+
+    .section-title {
+      margin-top: 26px;
+      margin-bottom: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    /* --- RÉCURRENTS --- */
+    .recurrence-header {
+      font-size: 13px;
+      opacity: 0.85;
+      margin-bottom: 8px;
+    }
+
+    .recurrence-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .recurrence-row {
+      display: grid;
+      grid-template-columns: 120px 80px 80px 170px 1fr 32px;
+      gap: 6px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .recurrence-row input,
+    .recurrence-row select {
+      padding: 4px 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(15,15,15,0.85);
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .recurrence-row input:focus,
+    .recurrence-row select:focus {
+      outline: 1px solid var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-rec-delete {
+      background: transparent;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.8);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 2px 0;
+    }
+
+    .btn-rec-delete:hover {
+      border-color: #ff6666;
+      background: rgba(229,57,53,0.2);
+      color: #fff;
+    }
+
+    .btn-rec-add {
+      margin-top: 10px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.4);
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .btn-rec-add:hover {
+      background: rgba(0,0,0,0.85);
+    }
+
+    @media (max-width: 900px) {
+      .timeline-header,
+      .task-row {
+        grid-template-columns: 1fr;
+      }
+      .task-track { margin-top: 6px; }
+      .add-form { grid-template-columns: 1fr; }
+      .add-form .btn-add {
+        justify-self: stretch;
+        text-align: center;
+      }
+      .day-selector {
+        flex-direction: column;
+      }
+      .recurrence-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <header>
+      <div class="title-block">
+        <h1>Distribution Gauthier</h1>
+        <p>Timeline des opérations – <span id="subtitle-day">Jeudi</span></p>
+      </div>
+      <div class="tag-day" id="tagDay">JEUDI – VUE HORAIRE</div>
+    </header>
+
+    <div class="day-selector">
+      <button id="prevWeek">Semaine précédente</button>
+      <span id="currentDateLabel">Jeudi</span>
+      <button id="nextWeek">Semaine suivante</button>
+      <button id="btnResetDay" style="margin-left:16px;">Réinitialiser la journée</button>
+    </div>
+
+    <div class="backup-controls">
+      <button type="button" class="backup-btn" id="btnExportJson">Exporter JSON (sauvegarde)</button>
+      <button type="button" class="backup-btn" id="btnImportJsonTrigger">Importer JSON</button>
+      <input type="file" id="inputImportJson" accept="application/json" style="display:none" />
+    </div>
+
+    <div class="weekday-tabs">
+      <button class="weekday-tab" data-weekday="1">Lundi</button>
+      <button class="weekday-tab" data-weekday="2">Mardi</button>
+      <button class="weekday-tab" data-weekday="3">Mercredi</button>
+      <button class="weekday-tab" data-weekday="4">Jeudi</button>
+      <button class="weekday-tab" data-weekday="5">Vendredi</button>
+    </div>
+
+    <div class="legend" id="legendFilters">
+      <div class="legend-item active" data-type="prep">
+        <span class="legend-color legend-prep"></span><span>Préparation</span>
+      </div>
+      <div class="legend-item active" data-type="montage">
+        <span class="legend-color legend-montage"></span><span>Montage</span>
+      </div>
+      <div class="legend-item active" data-type="reception">
+        <span class="legend-color legend-reception"></span><span>Réception</span>
+      </div>
+      <div class="legend-item active" data-type="livraison">
+        <span class="legend-color legend-livraison"></span><span>Livraison</span>
+      </div>
+      <div class="legend-item active" data-type="ramassage">
+        <span class="legend-color legend-ramassage"></span><span>Ramassage</span>
+      </div>
+      <div class="legend-item active" data-type="commandes">
+        <span class="legend-color legend-commandes"></span><span>Commandes</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="timeline-scroll">
+        <div class="timeline-header">
+          <div class="sticky-col">Bloc</div>
+          <div class="timeline-header-right">
+            <div>Heure (glisser et redimensionner)</div>
+            <div class="hour-ticks" id="hourTicks"></div>
+          </div>
+        </div>
+
+        <div class="timeline-body" id="timelineBody"></div>
+      </div>
+    </div>
+
+    <div class="editable-hint">
+      💡 Glisse les blocs <strong>horizontalement</strong> pour déplacer, tire les <strong>poignées</strong> pour allonger/raccourcir. Clique sur le texte pour modifier les descriptions.
+    </div>
+
+    <form id="addEventForm" class="add-form">
+      <div>
+        <label for="eventStart">Début</label>
+        <input type="text" id="eventStart" placeholder="ex: 7h30 ou 07:30" />
+      </div>
+      <div>
+        <label for="eventEnd">Fin</label>
+        <input type="text" id="eventEnd" placeholder="ex: 8h15 ou 08:15" />
+      </div>
+      <div>
+        <label for="eventType">Type</label>
+        <select id="eventType">
+          <option value="prep">Préparation</option>
+          <option value="montage" selected>Montage</option>
+          <option value="reception">Réception</option>
+          <option value="livraison">Livraison</option>
+          <option value="ramassage">Ramassage</option>
+          <option value="commandes">Commandes</option>
+        </select>
+      </div>
+      <div>
+        <label for="eventTitle">Titre</label>
+        <input type="text" id="eventTitle" placeholder="ex: Montage commandes web" />
+      </div>
+      <div style="grid-column: 1 / -1;">
+        <label for="eventSub">Détail</label>
+        <textarea id="eventSub" placeholder="ex: Clients principaux, remarques, tournées..."></textarea>
+      </div>
+      <button type="submit" class="btn-add">Ajouter un bloc</button>
+    </form>
+
+    <h2 class="section-title">Tâches récurrentes par jour</h2>
+    <div class="panel">
+      <div class="recurrence-header">
+        Ces tâches servent de modèle quand une nouvelle date de ce jour est ouverte pour la première fois.
+      </div>
+      <div id="recurrenceContainer">
+        <div class="recurrence-rows" id="recurrenceRows"></div>
+        <button type="button" class="btn-rec-add" id="btnAddRecurrence">Ajouter une tâche récurrente</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const START_HOUR = 6;
+    const END_HOUR = 17.5;
+    const PIXELS_PER_MINUTE = 2;
+    const MIN_DURATION_MIN = 15;
+    const STORAGE_PREFIX = "dg_timeline_";
+    const TEMPLATE_STORAGE_KEY = "dg_templates_v1";
+
+    const timelineBody = document.getElementById("timelineBody");
+    const hourTicks = document.getElementById("hourTicks");
+    const legendFilters = document.getElementById("legendFilters");
+    const currentDateLabel = document.getElementById("currentDateLabel");
+    const subtitleDayEl = document.getElementById("subtitle-day");
+    const tagDayEl = document.getElementById("tagDay");
+    const btnPrevWeek = document.getElementById("prevWeek");
+    const btnNextWeek = document.getElementById("nextWeek");
+    const btnResetDay = document.getElementById("btnResetDay");
+    const weekdayTabEls = document.querySelectorAll(".weekday-tab");
+
+    const recurrenceRowsEl = document.getElementById("recurrenceRows");
+    const btnAddRecurrence = document.getElementById("btnAddRecurrence");
+
+    const btnExportJson = document.getElementById("btnExportJson");
+    const btnImportJsonTrigger = document.getElementById("btnImportJsonTrigger");
+    const inputImportJson = document.getElementById("inputImportJson");
+
+    function parseTimeToMinutes(text) {
+      if (!text) return null;
+      let str = text.trim().toLowerCase();
+      let h, m;
+
+      let m1 = str.match(/(\d{1,2})\s*h\s*(\d{0,2})?/i);
+      if (m1) {
+        h = parseInt(m1[1], 10);
+        m = m1[2] ? parseInt(m1[2], 10) : 0;
+        if (isNaN(h) || isNaN(m)) return null;
+        return h * 60 + m;
+      }
+
+      let m2 = str.match(/(\d{1,2}):(\d{1,2})/);
+      if (m2) {
+        h = parseInt(m2[1], 10);
+        m = parseInt(m2[2], 10);
+        if (isNaN(h) || isNaN(m)) return null;
+        return h * 60 + m;
+      }
+
+      return null;
+    }
+
+    function minutesToLabel(totalMin) {
+      const h = Math.floor(totalMin / 60);
+      const m = totalMin % 60;
+      const mm = m.toString().padStart(2, "0");
+      return `${h}h${mm === "00" ? "" : mm}`;
+    }
+
+    function clamp(val, min, max) {
+      return Math.min(max, Math.max(min, val));
+    }
+
+    function dateToKey(d) {
+      return d.toISOString().slice(0, 10);
+    }
+
+    function capitalize(str) {
+      if (!str) return "";
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function formatDateFr(d) {
+      const weekday = d.toLocaleDateString("fr-CA", { weekday: "long" });
+      const dateStr = d.toLocaleDateString("fr-CA", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      return { weekday, dateStr };
+    }
+
+    function getWeekMonday(d) {
+      const tmp = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+      const day = tmp.getDay(); // 0=dim,1=lun..6=sam
+      const diff = day === 0 ? -6 : 1 - day; // ramène à lundi
+      tmp.setDate(tmp.getDate() + diff);
+      return tmp;
+    }
+
+    const baseTemplateThursday = [
+      { id: 1,  type: "prep",      title: "Préparation de la journée",             desc: "Organisation du plancher, mise en place des bacs, vérification des commandes.", start: "07:00", end: "07:45", completed: false },
+      { id: 2,  type: "montage",   title: "Début du montage des commandes",        desc: "Montage des commandes web et boutiques pour la journée.",                        start: "07:00", end: "07:45", completed: false },
+      { id: 3,  type: "reception", title: "Arrivée Pain Pomme",                    desc: "Réception et rangement rapide.",                                                start: "07:45", end: "08:00", completed: false },
+      { id: 4,  type: "reception", title: "Arrivée Jardin du Saguenay (fromage)",  desc: "Vérification des quantités et mise en chambre froide.",                         start: "08:15", end: "08:30", completed: false },
+      { id: 5,  type: "reception", title: "Arrivée Gordon",                        desc: "Déchargement, vérification et rangement.",                                     start: "08:30", end: "08:45", completed: false },
+      { id: 6,  type: "montage",   title: "Montage des commandes",                 desc: "Avancement des commandes après les réceptions du matin.",                      start: "08:30", end: "09:00", completed: false },
+      { id: 7,  type: "livraison", title: "Livraison du fromage frais",            desc: "Livraison du fromage dans les établissements prévus.",                          start: "09:00", end: "10:30", completed: false },
+      { id: 8,  type: "montage",   title: "Montage des commandes (bloc continu)",  desc: "Montage intensif, préparation des bacs et des caisses.",                        start: "09:00", end: "10:30", completed: false },
+      { id: 9,  type: "reception", title: "Arrivée Club Entrepôt",                 desc: "Réception du stock et mise en inventaire.",                                     start: "10:00", end: "10:15", completed: false },
+      { id:10,  type: "montage",   title: "Montage des commandes en cours",        desc: "Finalisation des commandes montées le matin.",                                  start: "10:30", end: "11:00", completed: false },
+      { id:11,  type: "livraison", title: "Livraison Coop",                        desc: "Livraison prévue pour la Coop.",                                                start: "11:00", end: "11:20", completed: false },
+      { id:12,  type: "ramassage", title: "Ramassage Wemok",                       desc: "Wemok passe récupérer sa commande.",                                            start: "11:00", end: "11:20", completed: false },
+      { id:13,  type: "montage",   title: "Montage final des commandes du matin",  desc: "Compléter les commandes, étiquettes, préparation des bacs.",                    start: "11:20", end: "11:55", completed: false },
+      { id:14,  type: "ramassage", title: "Ramassage Relais 22",                   desc: "Relais 22 passe récupérer sa commande.",                                         start: "12:00", end: "12:15", completed: false },
+      { id:15,  type: "montage",   title: "Gros bloc de montage des commandes",    desc: "Préparation des commandes PM et du lendemain, organisation de l’espace.",       start: "12:15", end: "13:20", completed: false },
+      { id:16,  type: "ramassage", title: "Ramassage Wemogas",                     desc: "Wemogas passe récupérer sa commande.",                                           start: "13:30", end: "13:45", completed: false },
+      { id:17,  type: "commandes", title: "Commander fromage",                     desc: "Commande de fromage pour la semaine suivante.",                                 start: "13:00", end: "13:30", completed: false },
+    ];
+
+    const baseTemplateFriday = [
+      { id: 200, type: "reception", title: "Agropur – Lait",                 desc: "Réception Agropur : lait",                             start: "07:00", end: "07:15", completed: false },
+      { id: 201, type: "reception", title: "Perron – Fromage",              desc: "Réception fromage Perron",                            start: "08:00", end: "08:15", completed: false },
+      { id: 202, type: "livraison", title: "Livraison fromage",             desc: "Tournée de livraison de fromage",                    start: "09:00", end: "10:30", completed: false },
+      { id: 203, type: "reception", title: "Colabor – Écoles",              desc: "Réception Colabor pour les écoles",                  start: "10:00", end: "10:20", completed: false },
+      { id: 204, type: "reception", title: "VP – Réception VP",             desc: "Réception VP (produits variés)",                     start: "10:30", end: "10:50", completed: false },
+      { id: 205, type: "ramassage", title: "Wemok – Ramassage palettes",    desc: "Ramassage de palettes par Wemok",                    start: "10:00", end: "10:30", completed: false },
+      { id: 206, type: "reception", title: "Bruno & Fils",                  desc: "Réception pour le comptoir",                         start: "13:00", end: "13:15", completed: false },
+      { id: 207, type: "reception", title: "Dubuc – Fruits & Légumes",      desc: "Réception fruits et légumes Dubuc",                 start: "13:00", end: "13:15", completed: false },
+      { id: 208, type: "ramassage", title: "Comptoir – Ramassage palettes", desc: "Ramassage de palettes du comptoir",                  start: "14:00", end: "14:30", completed: false },
+    ];
+
+    const DEFAULT_TEMPLATES_BY_WEEKDAY = {
+      1: [],
+      2: [],
+      3: [],
+      4: baseTemplateThursday,
+      5: baseTemplateFriday,
+    };
+
+    function cloneTemplatesObject(obj) {
+      const out = {};
+      for (const key in obj) {
+        out[key] = obj[key].map(t => ({ ...t }));
+      }
+      return out;
+    }
+
+    function loadTemplates() {
+      try {
+        const raw = localStorage.getItem(TEMPLATE_STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        const cleaned = {};
+        for (const key in parsed) {
+          cleaned[key] = parsed[key].map(t => ({ ...t }));
+        }
+        return cleaned;
+      } catch (e) {
+        console.warn("Impossible de lire les templates récurrents", e);
+        return null;
+      }
+    }
+
+    function saveTemplates() {
+      try {
+        localStorage.setItem(TEMPLATE_STORAGE_KEY, JSON.stringify(templatesByWeekday));
+      } catch (e) {
+        console.warn("Impossible de sauvegarder les templates récurrents", e);
+      }
+    }
+
+    let templatesByWeekday = loadTemplates() || cloneTemplatesObject(DEFAULT_TEMPLATES_BY_WEEKDAY);
+
+    function cloneTemplateForWeekday(wd) {
+      const arr = templatesByWeekday[wd] || [];
+      return arr.map(t => ({ ...t }));
+    }
+
+    let tasks = [];
+    let currentDate;
+    let currentDateKey;
+    let currentWeekday;
+    let currentRecurrenceWeekday;
+
+    function normalizeTasks() {
+      tasks.forEach(t => {
+        if (typeof t.startMin !== "number" || typeof t.endMin !== "number") {
+          const s = parseTimeToMinutes(t.start) ?? START_HOUR * 60;
+          const e = parseTimeToMinutes(t.end)   ?? (s + 30);
+          t.startMin = s;
+          t.endMin   = Math.max(e, s + MIN_DURATION_MIN);
+        }
+        t.duration = t.endMin - t.startMin;
+        if (typeof t.completed !== "boolean") t.completed = false;
+      });
+    }
+
+    function saveTasks() {
+      try {
+        const key = STORAGE_PREFIX + currentDateKey;
+        localStorage.setItem(key, JSON.stringify(tasks));
+      } catch (e) {
+        console.warn("Impossible de sauvegarder dans localStorage", e);
+      }
+    }
+
+    function getBaseTemplateForDate(date) {
+      const jsDay = date.getDay();
+      if (jsDay < 1 || jsDay > 5) return [];
+      return cloneTemplateForWeekday(jsDay);
+    }
+
+    // ---- RESET JOURNÉE → REVIENT AUX TÂCHES RÉCURRENTES ----
+    function resetCurrentDayToTemplate() {
+      try {
+        localStorage.removeItem(STORAGE_PREFIX + currentDateKey);
+      } catch (e) {
+        console.warn("Impossible d'effacer la journée", e);
+      }
+      loadTasksForCurrentDate();
+    }
+
+    function loadTasksForCurrentDate() {
+      const key = STORAGE_PREFIX + currentDateKey;
+      let stored = null;
+
+      try {
+        stored = localStorage.getItem(key);
+      } catch (e) {
+        console.warn("Impossible de lire localStorage", e);
+      }
+
+      let parsed = null;
+      if (stored) {
+        try {
+          parsed = JSON.parse(stored);
+        } catch (e) {
+          parsed = null;
+        }
+      }
+
+      if (!Array.isArray(parsed) || parsed.length === 0) {
+        tasks = getBaseTemplateForDate(currentDate);
+        saveTasks();
+      } else {
+        tasks = parsed;
+      }
+
+      normalizeTasks();
+      renderHourScale();
+      renderTasks();
+      updateDateLabelAndHeader();
+      setActiveWeekdayTab();
+
+      currentRecurrenceWeekday = currentWeekday;
+      renderRecurrenceEditor();
+    }
+
+    function updateDateLabelAndHeader() {
+      const { weekday, dateStr } = formatDateFr(currentDate);
+      const wkCap = capitalize(weekday);
+
+      currentDateLabel.textContent = `${wkCap} – ${dateStr}`;
+      subtitleDayEl.textContent = wkCap;
+      tagDayEl.textContent = `${weekday.toUpperCase()} – VUE HORAIRE`;
+    }
+
+    function setActiveWeekdayTab() {
+      weekdayTabEls.forEach(btn => {
+        const wd = parseInt(btn.dataset.weekday, 10);
+        if (wd === currentWeekday) btn.classList.add("active");
+        else btn.classList.remove("active");
+      });
+    }
+
+    function renderHourScale() {
+      hourTicks.innerHTML = "";
+      const totalMinutes = (END_HOUR - START_HOUR) * 60;
+      const totalWidth = totalMinutes * PIXELS_PER_MINUTE;
+      hourTicks.style.width = totalWidth + "px";
+
+      for (let h = START_HOUR; h <= END_HOUR; h++) {
+        const minsFromStart = (h - START_HOUR) * 60;
+        const x = minsFromStart * PIXELS_PER_MINUTE;
+
+        const tick = document.createElement("div");
+        tick.className = "hour-tick";
+        tick.style.left = x + "px";
+        tick.textContent = `${h}h`;
+        hourTicks.appendChild(tick);
+
+        const line = document.createElement("div");
+        line.className = "hour-tick-line";
+        line.style.left = x + "px";
+        hourTicks.appendChild(line);
+      }
+
+      const lastHalf = (END_HOUR * 60 - START_HOUR * 60);
+      const halfX = lastHalf * PIXELS_PER_MINUTE;
+      const halfLine = document.createElement("div");
+      halfLine.className = "hour-tick-line";
+      halfLine.style.left = halfX + "px";
+      hourTicks.appendChild(halfLine);
+    }
+
+    function typeLabel(type) {
+      switch (type) {
+        case "prep":      return "Préparation";
+        case "montage":   return "Montage";
+        case "reception": return "Réception";
+        case "livraison": return "Livraison";
+        case "ramassage": return "Ramassage";
+        case "commandes": return "Commandes";
+        default:          return "Autre";
+      }
+    }
+
+    let activeTypes = new Set(["prep", "montage", "reception", "livraison", "ramassage", "commandes"]);
+
+    function renderTasks() {
+      timelineBody.innerHTML = "";
+
+      const totalMinutes = (END_HOUR - START_HOUR) * 60;
+      const trackWidth = totalMinutes * PIXELS_PER_MINUTE;
+
+      const sorted = [...tasks].sort((a, b) => {
+        if (a.completed && !b.completed) return 1;
+        if (!a.completed && b.completed) return -1;
+        return a.startMin - b.startMin;
+      });
+
+      sorted.forEach(task => {
+        const row = document.createElement("div");
+        row.className = "task-row";
+        if (task.completed) row.classList.add("completed");
+        row.dataset.id = task.id;
+
+        if (!activeTypes.has(task.type)) {
+          row.style.display = "none";
+        }
+
+        const info = document.createElement("div");
+        info.className = "task-info";
+
+        const headerLine = document.createElement("div");
+        headerLine.className = "task-header-line";
+
+        const completeBtn = document.createElement("button");
+        completeBtn.className = "btn-complete" + (task.completed ? " is-completed" : "");
+        completeBtn.dataset.id = task.id;
+        completeBtn.textContent = task.completed ? "✓ Terminé" : "✓ Compléter";
+
+        const pill = document.createElement("div");
+        pill.className = `task-type-pill pill-${task.type}`;
+        pill.textContent = typeLabel(task.type);
+
+        headerLine.appendChild(completeBtn);
+        headerLine.appendChild(pill);
+
+        const title = document.createElement("div");
+        title.className = "task-title";
+        title.contentEditable = "true";
+        title.textContent = task.title;
+
+        const desc = document.createElement("div");
+        desc.className = "task-desc";
+        desc.contentEditable = "true";
+        desc.textContent = task.desc;
+
+        const timeLabel = document.createElement("div");
+        timeLabel.className = "task-time-label";
+        timeLabel.textContent = `${minutesToLabel(task.startMin)} – ${minutesToLabel(task.endMin)}`;
+
+        title.addEventListener("blur", () => {
+          task.title = title.textContent.trim();
+          saveTasks();
+        });
+
+        desc.addEventListener("blur", () => {
+          task.desc = desc.textContent.trim();
+          saveTasks();
+        });
+
+        info.appendChild(headerLine);
+        info.appendChild(title);
+        info.appendChild(desc);
+        info.appendChild(timeLabel);
+
+        const track = document.createElement("div");
+        track.className = "task-track";
+        track.style.width = trackWidth + "px";
+
+        for (let m = 0; m <= totalMinutes; m += 30) {
+          const gridLine = document.createElement("div");
+          gridLine.className = "timeline-grid-line";
+          gridLine.style.left = (m * PIXELS_PER_MINUTE) + "px";
+          track.appendChild(gridLine);
+        }
+
+        const block = document.createElement("div");
+        block.className = `task-block task-block-${task.type}`;
+        if (task.completed) block.classList.add("completed");
+        block.dataset.id = task.id;
+
+        const offsetFromStart = (task.startMin - START_HOUR * 60);
+        block.style.left = (offsetFromStart * PIXELS_PER_MINUTE) + "px";
+        block.style.width = (task.duration * PIXELS_PER_MINUTE) + "px";
+
+        block.innerHTML = `
+          <div class="resize-handle resize-left"></div>
+          <div class="resize-handle resize-right"></div>
+          <span>${typeLabel(task.type)}</span>
+          <button class="btn-delete">✕</button>
+        `;
+
+        track.appendChild(block);
+        row.appendChild(info);
+        row.appendChild(track);
+        timelineBody.appendChild(row);
+
+        enableDragAndResize(block, task, timeLabel);
+      });
+    }
+
+    function enableDragAndResize(block, task, timeLabelEl) {
+      let mode = null;
+      let startX = 0;
+      let startLeft = 0;
+      let startWidth = 0;
+
+      block.addEventListener("mousedown", (e) => {
+        if (e.target.classList.contains("btn-delete")) return;
+
+        if (e.target.classList.contains("resize-left")) {
+          mode = "resize-left";
+        } else if (e.target.classList.contains("resize-right")) {
+          mode = "resize-right";
+        } else {
+          mode = "move";
+        }
+
+        startX = e.clientX;
+        const style = getComputedStyle(block);
+        startLeft = parseFloat(style.left) || 0;
+        startWidth = parseFloat(style.width) || 0;
+        block.style.transition = "none";
+
+        e.preventDefault();
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!mode) return;
+        const delta = e.clientX - startX;
+
+        const totalMinutes = (END_HOUR - START_HOUR) * 60;
+        const maxLeft = totalMinutes * PIXELS_PER_MINUTE - startWidth;
+        const minLeft = 0;
+
+        if (mode === "move") {
+          let newLeft = startLeft + delta;
+          newLeft = clamp(newLeft, minLeft, maxLeft);
+          block.style.left = newLeft + "px";
+        } else if (mode === "resize-right") {
+          let newWidth = startWidth + delta;
+          const minWidth = MIN_DURATION_MIN * PIXELS_PER_MINUTE;
+          const maxWidth = totalMinutes * PIXELS_PER_MINUTE - startLeft;
+          newWidth = clamp(newWidth, minWidth, maxWidth);
+          block.style.width = newWidth + "px";
+        } else if (mode === "resize-left") {
+          let newLeft = startLeft + delta;
+          let newWidth = startWidth - delta;
+          const minWidth = MIN_DURATION_MIN * PIXELS_PER_MINUTE;
+          if (newLeft < minLeft) {
+            newLeft = minLeft;
+            newWidth = startLeft + startWidth;
+          }
+          if (newWidth < minWidth) {
+            newWidth = minWidth;
+            newLeft = startLeft + (startWidth - minWidth);
+          }
+          block.style.left = newLeft + "px";
+          block.style.width = newWidth + "px";
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        if (!mode) return;
+
+        const totalMinutes = (END_HOUR - START_HOUR) * 60;
+        let left = parseFloat(getComputedStyle(block).left) || 0;
+        let width = parseFloat(getComputedStyle(block).width) || 0;
+
+        let minsFromStart = left / PIXELS_PER_MINUTE;
+        minsFromStart = Math.round(minsFromStart / 5) * 5;
+
+        let durationMin = width / PIXELS_PER_MINUTE;
+        durationMin = Math.round(durationMin / 5) * 5;
+        durationMin = Math.max(durationMin, MIN_DURATION_MIN);
+
+        if (minsFromStart + durationMin > totalMinutes) {
+          minsFromStart = totalMinutes - durationMin;
+        }
+        minsFromStart = clamp(minsFromStart, 0, totalMinutes);
+
+        left = minsFromStart * PIXELS_PER_MINUTE;
+        width = durationMin * PIXELS_PER_MINUTE;
+
+        block.style.left = left + "px";
+        block.style.width = width + "px";
+        block.style.transition = "left 0.05s linear, width 0.05s linear";
+
+        const newStartMin = START_HOUR * 60 + minsFromStart;
+        task.startMin = newStartMin;
+        task.endMin = newStartMin + durationMin;
+        task.duration = durationMin;
+
+        timeLabelEl.textContent = `${minutesToLabel(task.startMin)} – ${minutesToLabel(task.endMin)}`;
+
+        saveTasks();
+        mode = null;
+      });
+    }
+
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("btn-delete")) {
+        const block = e.target.closest(".task-block");
+        if (!block) return;
+        const id = parseInt(block.dataset.id, 10);
+        tasks = tasks.filter(t => t.id !== id);
+        normalizeTasks();
+        saveTasks();
+        renderTasks();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("btn-complete")) {
+        const id = parseInt(e.target.dataset.id, 10);
+        const t = tasks.find(task => task.id === id);
+        if (!t) return;
+        t.completed = !t.completed;
+        normalizeTasks();
+        saveTasks();
+        renderTasks();
+      }
+    });
+
+    document.getElementById("addEventForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const startStr = document.getElementById("eventStart").value.trim();
+      const endStr   = document.getElementById("eventEnd").value.trim();
+      const type     = document.getElementById("eventType").value;
+      const title    = document.getElementById("eventTitle").value.trim() || "Nouveau bloc";
+      const desc     = document.getElementById("eventSub").value.trim();
+
+      const s = parseTimeToMinutes(startStr);
+      const eMin = parseTimeToMinutes(endStr);
+
+      if (s == null || eMin == null) {
+        alert("Heures invalides. Utilise par exemple 7h30 ou 07:30.");
+        return;
+      }
+      if (eMin <= s) {
+        alert("L'heure de fin doit être après le début.");
+        return;
+      }
+
+      const minStart = START_HOUR * 60;
+      const maxEnd = END_HOUR * 60;
+      const clampedStart = clamp(s, minStart, maxEnd);
+      const clampedEnd = clamp(eMin, minStart, maxEnd);
+
+      const id = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
+      tasks.push({
+        id,
+        type,
+        title,
+        desc,
+        start: startStr,
+        end: endStr,
+        startMin: clampedStart,
+        endMin: Math.max(clampedEnd, clampedStart + MIN_DURATION_MIN),
+        duration: Math.max(clampedEnd - clampedStart, MIN_DURATION_MIN),
+        completed: false
+      });
+
+      normalizeTasks();
+      saveTasks();
+      renderTasks();
+
+      document.getElementById("eventStart").value = "";
+      document.getElementById("eventEnd").value = "";
+      document.getElementById("eventTitle").value = "";
+      document.getElementById("eventSub").value = "";
+    });
+
+    legendFilters.addEventListener("click", (e) => {
+      const item = e.target.closest(".legend-item");
+      if (!item) return;
+      const type = item.dataset.type;
+      if (!type) return;
+
+      if (activeTypes.has(type)) {
+        activeTypes.delete(type);
+        item.classList.remove("active");
+        item.classList.add("inactive");
+      } else {
+        activeTypes.add(type);
+        item.classList.remove("inactive");
+        item.classList.add("active");
+      }
+
+      renderTasks();
+    });
+
+    timelineBody.addEventListener("scroll", () => {
+      const scrollLeft = timelineBody.scrollLeft;
+      hourTicks.style.transform = `translateX(${-scrollLeft}px)`;
+    });
+
+    btnPrevWeek.addEventListener("click", () => {
+      currentDate.setDate(currentDate.getDate() - 7);
+      currentWeekday = currentDate.getDay();
+      if (currentWeekday === 0) currentWeekday = 1;
+      if (currentWeekday === 6) currentWeekday = 5;
+      currentDateKey = dateToKey(currentDate);
+      loadTasksForCurrentDate();
+    });
+
+    btnNextWeek.addEventListener("click", () => {
+      currentDate.setDate(currentDate.getDate() + 7);
+      currentWeekday = currentDate.getDay();
+      if (currentWeekday === 0) currentWeekday = 1;
+      if (currentWeekday === 6) currentWeekday = 5;
+      currentDateKey = dateToKey(currentDate);
+      loadTasksForCurrentDate();
+    });
+
+    btnResetDay.addEventListener("click", () => {
+      if (confirm("Réinitialiser la journée et revenir aux tâches récurrentes pour ce jour?")) {
+        resetCurrentDayToTemplate();
+      }
+    });
+
+    weekdayTabEls.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const wd = parseInt(btn.dataset.weekday, 10);
+        currentWeekday = wd;
+        const monday = getWeekMonday(currentDate);
+        const newDate = new Date(monday);
+        newDate.setDate(monday.getDate() + (wd - 1));
+        currentDate = newDate;
+        currentDateKey = dateToKey(currentDate);
+        loadTasksForCurrentDate();
+      });
+    });
+
+    function renderRecurrenceEditor() {
+      const wd = currentRecurrenceWeekday;
+      const list = templatesByWeekday[wd] || [];
+      recurrenceRowsEl.innerHTML = "";
+
+      list.forEach((t, index) => {
+        const row = document.createElement("div");
+        row.className = "recurrence-row";
+        row.dataset.index = index;
+
+        const sel = document.createElement("select");
+        sel.className = "rec-type";
+        ["prep","montage","reception","livraison","ramassage","commandes"].forEach(val => {
+          const opt = document.createElement("option");
+          opt.value = val;
+          opt.textContent = typeLabel(val);
+          if (t.type === val) opt.selected = true;
+          sel.appendChild(opt);
+        });
+
+        const inputStart = document.createElement("input");
+        inputStart.className = "rec-start";
+        inputStart.placeholder = "07:00";
+        inputStart.value = t.start || "";
+
+        const inputEnd = document.createElement("input");
+        inputEnd.className = "rec-end";
+        inputEnd.placeholder = "07:15";
+        inputEnd.value = t.end || "";
+
+        const inputTitle = document.createElement("input");
+        inputTitle.className = "rec-title";
+        inputTitle.placeholder = "Titre";
+        inputTitle.value = t.title || "";
+
+        const inputDesc = document.createElement("input");
+        inputDesc.className = "rec-desc";
+        inputDesc.placeholder = "Détail";
+        inputDesc.value = t.desc || "";
+
+        const btnDel = document.createElement("button");
+        btnDel.type = "button";
+        btnDel.className = "btn-rec-delete";
+        btnDel.textContent = "✕";
+
+        row.appendChild(sel);
+        row.appendChild(inputStart);
+        row.appendChild(inputEnd);
+        row.appendChild(inputTitle);
+        row.appendChild(inputDesc);
+        row.appendChild(btnDel);
+
+        recurrenceRowsEl.appendChild(row);
+      });
+    }
+
+    recurrenceRowsEl.addEventListener("input", (e) => {
+      const row = e.target.closest(".recurrence-row");
+      if (!row) return;
+      const index = parseInt(row.dataset.index, 10);
+      const wd = currentRecurrenceWeekday;
+      const list = templatesByWeekday[wd] || [];
+
+      const typeSel = row.querySelector(".rec-type");
+      const startInput = row.querySelector(".rec-start");
+      const endInput = row.querySelector(".rec-end");
+      const titleInput = row.querySelector(".rec-title");
+      const descInput = row.querySelector(".rec-desc");
+
+      const item = list[index];
+      if (!item) return;
+
+      item.type = typeSel.value;
+      item.start = startInput.value.trim();
+      item.end = endInput.value.trim();
+      item.title = titleInput.value.trim();
+      item.desc = descInput.value.trim();
+
+      templatesByWeekday[wd] = list;
+      saveTemplates();
+    });
+
+    recurrenceRowsEl.addEventListener("click", (e) => {
+      if (e.target.classList.contains("btn-rec-delete")) {
+        const row = e.target.closest(".recurrence-row");
+        if (!row) return;
+        const index = parseInt(row.dataset.index, 10);
+        const wd = currentRecurrenceWeekday;
+        const list = templatesByWeekday[wd] || [];
+        list.splice(index, 1);
+        templatesByWeekday[wd] = list;
+        saveTemplates();
+        renderRecurrenceEditor();
+      }
+    });
+
+    btnAddRecurrence.addEventListener("click", () => {
+      const wd = currentRecurrenceWeekday;
+      const list = templatesByWeekday[wd] || [];
+      const newId = list.length ? Math.max(...list.map(t => t.id || 1)) + 1 : 1;
+      list.push({
+        id: newId,
+        type: "prep",
+        title: "Nouvelle tâche",
+        desc: "",
+        start: "07:00",
+        end: "07:15",
+        completed: false,
+      });
+      templatesByWeekday[wd] = list;
+      saveTemplates();
+      renderRecurrenceEditor();
+    });
+
+    function exportAllDataToJson() {
+      const allDays = {};
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (!key || !key.startsWith(STORAGE_PREFIX)) continue;
+          const dateKey = key.substring(STORAGE_PREFIX.length);
+          try {
+            const val = JSON.parse(localStorage.getItem(key));
+            allDays[dateKey] = val;
+          } catch (e) {
+            console.warn("Impossible de parser la journée", key, e);
+          }
+        }
+      } catch (e) {
+        console.warn("Erreur en lisant localStorage pour export", e);
+      }
+
+      const payload = {
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        templatesByWeekday,
+        days: allDays,
+      };
+
+      const blob = new Blob([JSON.stringify(payload, null, 2)], {
+        type: "application/json",
+      });
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const now = new Date();
+      const fname = `dg-timeline-backup-${now.toISOString().slice(0,10)}.json`;
+      a.href = url;
+      a.download = fname;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function importAllDataFromFile(file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (!data || typeof data !== "object") {
+            throw new Error("Format JSON invalide");
+          }
+
+          if (data.templatesByWeekday) {
+            templatesByWeekday = data.templatesByWeekday;
+            saveTemplates();
+          }
+
+          if (data.days && typeof data.days === "object") {
+            for (const dateKey in data.days) {
+              try {
+                localStorage.setItem(
+                  STORAGE_PREFIX + dateKey,
+                  JSON.stringify(data.days[dateKey])
+                );
+              } catch (err) {
+                console.warn("Erreur en important la journée", dateKey, err);
+              }
+            }
+          }
+
+          alert("Importation terminée. Les données ont été chargées.");
+          currentDateKey = dateToKey(currentDate);
+          loadTasksForCurrentDate();
+        } catch (err) {
+          console.error(err);
+          alert(
+            "Impossible de lire ce fichier JSON.\nAssure-toi que c'est bien un export du tableau de bord."
+          );
+        }
+      };
+      reader.readAsText(file, "utf-8");
+    }
+
+    btnExportJson.addEventListener("click", () => {
+      exportAllDataToJson();
+    });
+
+    btnImportJsonTrigger.addEventListener("click", () => {
+      inputImportJson.click();
+    });
+
+    inputImportJson.addEventListener("change", (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      importAllDataFromFile(file);
+      inputImportJson.value = "";
+    });
+
+    (function init() {
+      const today = new Date();
+      let d = today.getDay();
+      if (d === 0) d = 1;
+      if (d === 6) d = 5;
+      currentWeekday = Math.min(Math.max(d, 1), 5);
+
+      const monday = getWeekMonday(today);
+      currentDate = new Date(monday);
+      currentDate.setDate(monday.getDate() + (currentWeekday - 1));
+      currentDateKey = dateToKey(currentDate);
+
+      currentRecurrenceWeekday = currentWeekday;
+      loadTasksForCurrentDate();
+    })();
+  </script>
+</body>
+</html>
