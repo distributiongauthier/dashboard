@@ -373,6 +373,7 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.6);
       border: 1px solid rgba(255,255,255,0.15);
       transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+      touch-action: none; /* important pour le drag sur mobile */
     }
 
     .task-block:active { cursor: grabbing; }
@@ -598,23 +599,52 @@
       background: rgba(0,0,0,0.85);
     }
 
+    /* --- MOBILE --- */
     @media (max-width: 900px) {
+      .dashboard {
+        padding: 12px 10px 24px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .timeline-header,
       .task-row {
         grid-template-columns: 1fr;
+        min-width: 600px;
       }
-      .task-track { margin-top: 6px; }
-      .add-form { grid-template-columns: 1fr; }
+
+      .timeline-body {
+        max-height: 70vh;
+        min-width: 600px;
+      }
+
+      .task-track {
+        margin-top: 6px;
+        height: 40px;
+      }
+
+      .task-title {
+        font-size: 13px;
+      }
+
+      .task-desc {
+        font-size: 11px;
+      }
+
+      .add-form {
+        grid-template-columns: 1fr;
+      }
+
       .add-form .btn-add {
         justify-self: stretch;
         text-align: center;
       }
-      .day-selector {
-        flex-direction: column;
-      }
-      .recurrence-row {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto;
+
+      .legend {
+        font-size: 11px;
       }
     }
   </style>
@@ -633,7 +663,9 @@
       <button id="prevWeek">Semaine précédente</button>
       <span id="currentDateLabel">Jeudi</span>
       <button id="nextWeek">Semaine suivante</button>
-      <button id="btnResetDay" style="margin-left:16px;">Réinitialiser la journée</button>
+      <button id="btnResetDay" style="margin-left:16px;">
+        Réinitialiser la journée
+      </button>
     </div>
 
     <div class="backup-controls">
@@ -748,7 +780,6 @@
     const tagDayEl = document.getElementById("tagDay");
     const btnPrevWeek = document.getElementById("prevWeek");
     const btnNextWeek = document.getElementById("nextWeek");
-    const btnResetDay = document.getElementById("btnResetDay");
     const weekdayTabEls = document.querySelectorAll(".weekday-tab");
 
     const recurrenceRowsEl = document.getElementById("recurrenceRows");
@@ -757,6 +788,7 @@
     const btnExportJson = document.getElementById("btnExportJson");
     const btnImportJsonTrigger = document.getElementById("btnImportJsonTrigger");
     const inputImportJson = document.getElementById("inputImportJson");
+    const btnResetDay = document.getElementById("btnResetDay");
 
     function parseTimeToMinutes(text) {
       if (!text) return null;
@@ -814,50 +846,22 @@
 
     function getWeekMonday(d) {
       const tmp = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-      const day = tmp.getDay(); // 0=dim,1=lun..6=sam
-      const diff = day === 0 ? -6 : 1 - day; // ramène à lundi
+      const day = tmp.getDay();
+      const diff = day === 0 ? -6 : 1 - day;
       tmp.setDate(tmp.getDate() + diff);
       return tmp;
     }
 
-    const baseTemplateThursday = [
-      { id: 1,  type: "prep",      title: "Préparation de la journée",             desc: "Organisation du plancher, mise en place des bacs, vérification des commandes.", start: "07:00", end: "07:45", completed: false },
-      { id: 2,  type: "montage",   title: "Début du montage des commandes",        desc: "Montage des commandes web et boutiques pour la journée.",                        start: "07:00", end: "07:45", completed: false },
-      { id: 3,  type: "reception", title: "Arrivée Pain Pomme",                    desc: "Réception et rangement rapide.",                                                start: "07:45", end: "08:00", completed: false },
-      { id: 4,  type: "reception", title: "Arrivée Jardin du Saguenay (fromage)",  desc: "Vérification des quantités et mise en chambre froide.",                         start: "08:15", end: "08:30", completed: false },
-      { id: 5,  type: "reception", title: "Arrivée Gordon",                        desc: "Déchargement, vérification et rangement.",                                     start: "08:30", end: "08:45", completed: false },
-      { id: 6,  type: "montage",   title: "Montage des commandes",                 desc: "Avancement des commandes après les réceptions du matin.",                      start: "08:30", end: "09:00", completed: false },
-      { id: 7,  type: "livraison", title: "Livraison du fromage frais",            desc: "Livraison du fromage dans les établissements prévus.",                          start: "09:00", end: "10:30", completed: false },
-      { id: 8,  type: "montage",   title: "Montage des commandes (bloc continu)",  desc: "Montage intensif, préparation des bacs et des caisses.",                        start: "09:00", end: "10:30", completed: false },
-      { id: 9,  type: "reception", title: "Arrivée Club Entrepôt",                 desc: "Réception du stock et mise en inventaire.",                                     start: "10:00", end: "10:15", completed: false },
-      { id:10,  type: "montage",   title: "Montage des commandes en cours",        desc: "Finalisation des commandes montées le matin.",                                  start: "10:30", end: "11:00", completed: false },
-      { id:11,  type: "livraison", title: "Livraison Coop",                        desc: "Livraison prévue pour la Coop.",                                                start: "11:00", end: "11:20", completed: false },
-      { id:12,  type: "ramassage", title: "Ramassage Wemok",                       desc: "Wemok passe récupérer sa commande.",                                            start: "11:00", end: "11:20", completed: false },
-      { id:13,  type: "montage",   title: "Montage final des commandes du matin",  desc: "Compléter les commandes, étiquettes, préparation des bacs.",                    start: "11:20", end: "11:55", completed: false },
-      { id:14,  type: "ramassage", title: "Ramassage Relais 22",                   desc: "Relais 22 passe récupérer sa commande.",                                         start: "12:00", end: "12:15", completed: false },
-      { id:15,  type: "montage",   title: "Gros bloc de montage des commandes",    desc: "Préparation des commandes PM et du lendemain, organisation de l’espace.",       start: "12:15", end: "13:20", completed: false },
-      { id:16,  type: "ramassage", title: "Ramassage Wemogas",                     desc: "Wemogas passe récupérer sa commande.",                                           start: "13:30", end: "13:45", completed: false },
-      { id:17,  type: "commandes", title: "Commander fromage",                     desc: "Commande de fromage pour la semaine suivante.",                                 start: "13:00", end: "13:30", completed: false },
-    ];
-
-    const baseTemplateFriday = [
-      { id: 200, type: "reception", title: "Agropur – Lait",                 desc: "Réception Agropur : lait",                             start: "07:00", end: "07:15", completed: false },
-      { id: 201, type: "reception", title: "Perron – Fromage",              desc: "Réception fromage Perron",                            start: "08:00", end: "08:15", completed: false },
-      { id: 202, type: "livraison", title: "Livraison fromage",             desc: "Tournée de livraison de fromage",                    start: "09:00", end: "10:30", completed: false },
-      { id: 203, type: "reception", title: "Colabor – Écoles",              desc: "Réception Colabor pour les écoles",                  start: "10:00", end: "10:20", completed: false },
-      { id: 204, type: "reception", title: "VP – Réception VP",             desc: "Réception VP (produits variés)",                     start: "10:30", end: "10:50", completed: false },
-      { id: 205, type: "ramassage", title: "Wemok – Ramassage palettes",    desc: "Ramassage de palettes par Wemok",                    start: "10:00", end: "10:30", completed: false },
-      { id: 206, type: "reception", title: "Bruno & Fils",                  desc: "Réception pour le comptoir",                         start: "13:00", end: "13:15", completed: false },
-      { id: 207, type: "reception", title: "Dubuc – Fruits & Légumes",      desc: "Réception fruits et légumes Dubuc",                 start: "13:00", end: "13:15", completed: false },
-      { id: 208, type: "ramassage", title: "Comptoir – Ramassage palettes", desc: "Ramassage de palettes du comptoir",                  start: "14:00", end: "14:30", completed: false },
-    ];
+    // Templates de base (tu peux les adapter plus tard si tu veux)
+    const baseTemplateThursday = [];
+    const baseTemplateFriday = [];
 
     const DEFAULT_TEMPLATES_BY_WEEKDAY = {
-      1: [],
-      2: [],
-      3: [],
-      4: baseTemplateThursday,
-      5: baseTemplateFriday,
+      1: [],                  // Lundi
+      2: [],                  // Mardi
+      3: [],                  // Mercredi
+      4: baseTemplateThursday,// Jeudi
+      5: baseTemplateFriday,  // Vendredi
     };
 
     function cloneTemplatesObject(obj) {
@@ -931,16 +935,6 @@
       const jsDay = date.getDay();
       if (jsDay < 1 || jsDay > 5) return [];
       return cloneTemplateForWeekday(jsDay);
-    }
-
-    // ---- RESET JOURNÉE → REVIENT AUX TÂCHES RÉCURRENTES ----
-    function resetCurrentDayToTemplate() {
-      try {
-        localStorage.removeItem(STORAGE_PREFIX + currentDateKey);
-      } catch (e) {
-        console.warn("Impossible d'effacer la journée", e);
-      }
-      loadTasksForCurrentDate();
     }
 
     function loadTasksForCurrentDate() {
@@ -1083,12 +1077,12 @@
         const title = document.createElement("div");
         title.className = "task-title";
         title.contentEditable = "true";
-        title.textContent = task.title;
+        title.textContent = task.title || "";
 
         const desc = document.createElement("div");
         desc.className = "task-desc";
         desc.contentEditable = "true";
-        desc.textContent = task.desc;
+        desc.textContent = task.desc || "";
 
         const timeLabel = document.createElement("div");
         timeLabel.className = "task-time-label";
@@ -1145,13 +1139,15 @@
       });
     }
 
+    // VERSION POINTER EVENTS (souris + touch)
     function enableDragAndResize(block, task, timeLabelEl) {
       let mode = null;
       let startX = 0;
       let startLeft = 0;
       let startWidth = 0;
+      let pointerId = null;
 
-      block.addEventListener("mousedown", (e) => {
+      function onPointerDown(e) {
         if (e.target.classList.contains("btn-delete")) return;
 
         if (e.target.classList.contains("resize-left")) {
@@ -1162,6 +1158,9 @@
           mode = "move";
         }
 
+        pointerId = e.pointerId;
+        block.setPointerCapture(pointerId);
+
         startX = e.clientX;
         const style = getComputedStyle(block);
         startLeft = parseFloat(style.left) || 0;
@@ -1169,12 +1168,12 @@
         block.style.transition = "none";
 
         e.preventDefault();
-      });
+      }
 
-      document.addEventListener("mousemove", (e) => {
-        if (!mode) return;
+      function onPointerMove(e) {
+        if (!mode || e.pointerId !== pointerId) return;
+
         const delta = e.clientX - startX;
-
         const totalMinutes = (END_HOUR - START_HOUR) * 60;
         const maxLeft = totalMinutes * PIXELS_PER_MINUTE - startWidth;
         const minLeft = 0;
@@ -1193,6 +1192,7 @@
           let newLeft = startLeft + delta;
           let newWidth = startWidth - delta;
           const minWidth = MIN_DURATION_MIN * PIXELS_PER_MINUTE;
+
           if (newLeft < minLeft) {
             newLeft = minLeft;
             newWidth = startLeft + startWidth;
@@ -1204,10 +1204,10 @@
           block.style.left = newLeft + "px";
           block.style.width = newWidth + "px";
         }
-      });
+      }
 
-      document.addEventListener("mouseup", () => {
-        if (!mode) return;
+      function onPointerUp(e) {
+        if (!mode || e.pointerId !== pointerId) return;
 
         const totalMinutes = (END_HOUR - START_HOUR) * 60;
         let left = parseFloat(getComputedStyle(block).left) || 0;
@@ -1237,13 +1237,24 @@
         task.endMin = newStartMin + durationMin;
         task.duration = durationMin;
 
-        timeLabelEl.textContent = `${minutesToLabel(task.startMin)} – ${minutesToLabel(task.endMin)}`;
+        timeLabelEl.textContent =
+          `${minutesToLabel(task.startMin)} – ${minutesToLabel(task.endMin)}`;
 
         saveTasks();
         mode = null;
-      });
+        try {
+          block.releasePointerCapture(pointerId);
+        } catch (_) {}
+        pointerId = null;
+      }
+
+      block.addEventListener("pointerdown", onPointerDown);
+      block.addEventListener("pointermove", onPointerMove);
+      block.addEventListener("pointerup", onPointerUp);
+      block.addEventListener("pointercancel", onPointerUp);
     }
 
+    // suppression
     document.addEventListener("click", (e) => {
       if (e.target.classList.contains("btn-delete")) {
         const block = e.target.closest(".task-block");
@@ -1256,6 +1267,7 @@
       }
     });
 
+    // compléter / décocher
     document.addEventListener("click", (e) => {
       if (e.target.classList.contains("btn-complete")) {
         const id = parseInt(e.target.dataset.id, 10);
@@ -1268,6 +1280,7 @@
       }
     });
 
+    // ajout de bloc
     document.getElementById("addEventForm").addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -1294,7 +1307,7 @@
       const clampedStart = clamp(s, minStart, maxEnd);
       const clampedEnd = clamp(eMin, minStart, maxEnd);
 
-      const id = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
+      const id = tasks.length ? Math.max(...tasks.map(t => t.id || 0)) + 1 : 1;
       tasks.push({
         id,
         type,
@@ -1318,6 +1331,7 @@
       document.getElementById("eventSub").value = "";
     });
 
+    // filtre légende
     legendFilters.addEventListener("click", (e) => {
       const item = e.target.closest(".legend-item");
       if (!item) return;
@@ -1337,11 +1351,13 @@
       renderTasks();
     });
 
+    // sync scroll horizontal
     timelineBody.addEventListener("scroll", () => {
       const scrollLeft = timelineBody.scrollLeft;
       hourTicks.style.transform = `translateX(${-scrollLeft}px)`;
     });
 
+    // navigation semaine
     btnPrevWeek.addEventListener("click", () => {
       currentDate.setDate(currentDate.getDate() - 7);
       currentWeekday = currentDate.getDay();
@@ -1360,12 +1376,7 @@
       loadTasksForCurrentDate();
     });
 
-    btnResetDay.addEventListener("click", () => {
-      if (confirm("Réinitialiser la journée et revenir aux tâches récurrentes pour ce jour?")) {
-        resetCurrentDayToTemplate();
-      }
-    });
-
+    // changer de jour
     weekdayTabEls.forEach(btn => {
       btn.addEventListener("click", () => {
         const wd = parseInt(btn.dataset.weekday, 10);
@@ -1379,6 +1390,18 @@
       });
     });
 
+    // RÉINITIALISER LA JOURNÉE
+    btnResetDay.addEventListener("click", () => {
+      if (!confirm("Réinitialiser la journée et recharger les tâches récurrentes pour ce jour?")) {
+        return;
+      }
+      tasks = getBaseTemplateForDate(currentDate);
+      normalizeTasks();
+      saveTasks();
+      renderTasks();
+    });
+
+    // ÉDITEUR RÉCURRENT
     function renderRecurrenceEditor() {
       const wd = currentRecurrenceWeekday;
       const list = templatesByWeekday[wd] || [];
@@ -1493,6 +1516,7 @@
       renderRecurrenceEditor();
     });
 
+    // EXPORT / IMPORT
     function exportAllDataToJson() {
       const allDays = {};
       try {
@@ -1589,6 +1613,7 @@
       inputImportJson.value = "";
     });
 
+    // INIT
     (function init() {
       const today = new Date();
       let d = today.getDay();
